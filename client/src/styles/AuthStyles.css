@@ -1,0 +1,137 @@
+/* ===================================
+========= register page  */
+.form-container {
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  gap: 10px;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 20px;
+  position: relative;
+}
+
+.form-container form {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.form-container .title {
+  text-align: center;
+  font-size: 28px;
+  color: royalblue;
+  letter-spacing: -1px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+  margin-bottom: 15px;
+  font-weight: 600;
+  font-family: "Playfair Display", serif;
+}
+
+.form-container .title::before,.title::after{
+  position: absolute;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  left: 0px;
+  background-color: royalblue;
+  content: "";
+}
+
+.title::before{
+  width: 18px;
+  height: 18px;
+  background-color: royalblue;
+}
+
+.title::after{
+  width: 18px;
+  height: 18px;
+  animation: pulse 1s linear infinite;
+}
+
+.form-container  .input {
+  width: 100%;
+  padding: 10px 10px 20px 10px;
+  outline: 0;
+  border-bottom: 1px solid rgba(105, 105, 105, 0.397);
+  border-radius: 10px;
+  position: absolute;
+  left: 10px;
+  top: 15px;
+  color: gray;
+  font-size: 0.9em;
+  cursor: text;
+  transition: 0.3s ease;
+}
+
+.form-container form button {
+  border: 1px solid;
+  border-radius: 0;
+  color: white;
+  width: 250px;
+}
+
+
+.form-container .signin{
+  text-align: center;
+}
+
+.form-container .signin a {
+  color: royalblue;
+}
+
+.form-container .signin a:hover {
+  text-decoration: none;
+}
+
+.form-container .submit {
+  border: none;
+  outline: none;
+  background-color: royalblue;
+  padding: 10px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  transform: .3s ease;
+}
+
+.form-container .submit:hover{
+  background-color: rgb(56, 90, 194);
+}
+
+@keyframes pulse {
+  from{
+    transform: scale(0.9);
+    opacity:1;
+  }
+
+  to{
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+.form-container .forgot{
+  display: flex;
+  justify-content: flex-end;
+  font-size: 1rem;
+  line-height: 1rem;
+  color: gray;
+  margin: 8px 0 14px 0;
+}
+
+.form-container .forgot a {
+  color: rgba(243, 244, 246,1);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.form-container .forgot a:hover{
+  text-decoration: underline rgba(167, 139, 250,1);
+}

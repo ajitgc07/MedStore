@@ -1,0 +1,66 @@
+
+  
+  .search {
+    display: flex;
+    line-height: 28px;
+    align-items: center;
+    position: relative;
+    flex-wrap: wrap;
+  }
+  .search .card {
+    background-color: rgba(128, 128, 128, 0.097);
+    width: 18rem;
+    justify-content: flex-start;
+    flex-direction: column;
+    box-shadow: #323232;
+    border-radius: 5px;
+  }
+  .search .card-name-price {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .search .card-price {
+    color: green;
+    font-weight: bold;
+  }
+  .search button {
+    border-radius: 0;
+    width: 100%;
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s;
+    padding: 5px 15px;
+  }
+
+  .search .card-divider{
+    width: 100%;
+    border: 1px solid #323232;
+    border-radius: 50px;
+  }
+  
+  .search .card-text {
+    color: rgb(90, 89, 89);
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+  }
+  
+  .search .card img:hover {
+    transform: translateY(-3px);
+  }
+
+  .search .card-btn:hover{
+    border: 2px solid #2d8cf0;
+  }
+  
+  .search .card-img-top {
+    height: 300px !important;
+    transform: scale(1);
+    position: relative;
+    box-sizing: border-box;
+    background-image: linear-gradient(to top, transparent 10px,rgba(0,0,0,0.3)10px,rbga(0,0,0,0.3)13px, transparent 13px );
+  }

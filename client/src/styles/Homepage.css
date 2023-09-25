@@ -1,0 +1,109 @@
+.banner-img {
+    margin-top: 0%;
+    height:25rem;
+  }
+
+
+  
+  .home-page h1 {
+    color: black;
+    font-family: "Playfair Display", serif;
+  }
+  
+  .home-page {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .home-page .card {
+    background-color: rgba(128, 128, 128, 0.097);
+    width: 18rem;
+    justify-content: flex-start;
+    flex-direction: column;
+    box-shadow: #323232;
+    border-radius: 5px;
+  }
+  .home-page .card-name-price {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .home-page .card-price {
+    color: green;
+    font-weight: bold;
+  }
+  .home-page button {
+    border-radius: 0;
+    width: 100%;
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s;
+    padding: 5px 15px;
+  }
+
+  .home-page .card-divider{
+    width: 100%;
+    border: 1px solid #323232;
+    border-radius: 50px;
+  }
+  
+  .home-page .card-text {
+    color: rgb(90, 89, 89);
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+  }
+  
+  .home-page .card img:hover {
+    transform: translateY(-3px);
+  }
+
+  .home-page .card-btn:hover{
+    border: 2px solid #2d8cf0;
+  }
+  
+  .home-page .card-img-top {
+    height: 300px !important;
+    transform: scale(1);
+    position: relative;
+    box-sizing: border-box;
+    background-image: linear-gradient(to top, transparent 10px,rgba(0,0,0,0.3)10px,rbga(0,0,0,0.3)13px, transparent 13px );
+  }
+  /* ==================
+  filters
+  ============== */
+  .filters h4 {
+    margin-top: 100px;
+    color: black !important;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.337);
+  }
+
+  /*
+  .ant-checkbox-wrapper:first-of-type {
+    margin-left: 8px;
+  }*/
+  
+  .ant-checkbox-wrapper {
+    margin: 5px;
+    background-color: none;
+  }
+  .ant-radio-wrapper {
+    margin-bottom: 5px !important;
+    margin-left: 10px;
+  }
+  
+  .filters button {
+    background-color: black;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    margin-top: 20px;
+  }
+  
+  .loadmore {
+    color: green;
+    font-weight: bold;
+    font-size: 20px !important;
+  }

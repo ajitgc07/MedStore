@@ -1,0 +1,11 @@
+{
+    "settings": {
+        "git.allowForcePush": true,
+        "git.autofetch": "all"
+    },
+    "folders": [
+        {
+            "path": ".."
+        }
+    ]
+}
