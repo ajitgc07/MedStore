@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import "../styles/CartStyles.css";
+import DropIn from "braintree-web-drop-in-react";
 
 const CartPage = () => {
     const [auth, setAuth] = useAuth();
@@ -95,7 +96,7 @@ const CartPage = () => {
                 </div>
                 <div className="container ">
                     <div className="row ">
-                        <div className="col-md-7  p-0 m-0">
+                        <div className="col-md-6  p-0 m-0">
                             {cart?.map((p) => (
                                 <div className="row card flex-row" key={p._id}>
                                     <div className="col-md-4">
@@ -122,7 +123,7 @@ const CartPage = () => {
                                 </div>
                             ))}
                         </div>
-                        <div className="col-md-5 cart-summary ">
+                        <div className="col-md-4 cart-summary ">
                             <h2>Cart Summary</h2>
                             <p>Total | Checkout | Payment</p>
                             <hr />
@@ -163,6 +164,30 @@ const CartPage = () => {
                                     )}
                                 </div>
                             )}
+                            <div className="mt-2">
+                                {
+                                    !clientToken || !cart?.length ? (
+                                        " "
+                                    ) : (
+                                        <>
+                                            <DropIn
+                                                options={{
+                                                    authorization: clientToken,
+                                                    paypal: {
+                                                        flow: 'vault',
+                                                    },
+                                                }}
+                                                onInstance={(instance) => setInstance(instance)}
+                                            />
+                                            <button className="btn btn-primary" onClick={handlePayment}
+                                                disabled={!clientToken || !loading || !instance || !auth?.user?.address}
+                                            >
+                                                {loading ? "Processing...." : "Make Payment"}
+                                            </button>
+                                        </>
+                                    )
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
