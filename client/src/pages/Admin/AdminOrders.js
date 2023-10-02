@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import AdminMenu from "../../components/Layout/AdminMenu";
-import Layout from "../../components/Layout/Layout";
-import { useAuth } from "../../context/auth";
+import AdminMenu from "../../components/Layout/AdminMenu.js";
+import Layout from "../../components/Layout/Layout.js";
+import { useAuth } from "../../context/auth.js";
 import moment from "moment";
 import { Select } from "antd";
 const { Option } = Select;
 
 const AdminOrders = () => {
-    const [status] = useState([
+    const [status, setStatus] = useState([
         "Not Process",
         "Processing",
         "Shipped",
@@ -58,7 +58,7 @@ const AdminOrders = () => {
                                             <th scope="col">#</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Buyer</th>
-                                            <th scope="col"> date</th>
+                                            <th scope="col"> Date</th>
                                             <th scope="col">Payment</th>
                                             <th scope="col">Quantity</th>
                                         </tr>

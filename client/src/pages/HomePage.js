@@ -20,6 +20,39 @@ const HomePage = () => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
+  // Increase quantity of a product in the cart
+  const increaseQuantity = (productId) => {
+    const updatedCart = cart.map((item) => {
+      if (item._id === productId) {
+        return {
+          ...item,
+          quantity: item.quantity + 1,
+        };
+      }
+      return item;
+    });
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
+
+    // Add new item to the cart
+const addToCart = (product) => {
+  const existingItem = cart.find((item) => item._id === product._id);
+
+  if (existingItem) {
+    // If item already exists, increase the quantity
+    increaseQuantity(product._id);
+    toast.success('Item added to cart');
+  } else {
+    // If item doesn't exist, add it to the cart with quantity 1
+    const newItem = { ...product, quantity: 1 };
+    const updatedCart = [...cart, newItem];
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    toast.success('Item added to cart');
+  }
+};
+
   //get all cat
   const getAllCategory = async () => {
     try {
@@ -186,12 +219,7 @@ const HomePage = () => {
                     <button
                       className="btn btn-dark ms-1"
                       onClick={() => {
-                        setCart([...cart, p]);
-                        localStorage.setItem(
-                          "cart",
-                          JSON.stringify([...cart, p])
-                        );
-                        toast.success("Item Added to cart");
+                              addToCart(p)
                       }}
                     >
                       ADD TO CART

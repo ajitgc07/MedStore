@@ -23,7 +23,7 @@ const CartPage = () => {
             cart?.map((item) => {
                 total = total + item.price;
             });
-            return total.toLocaleString("en-US", {
+            return total.toLocaleString("ne-NP", {
                 style: "currency",
                 currency: "NPR",
             });
@@ -31,6 +31,38 @@ const CartPage = () => {
             console.log(error);
         }
     };
+
+    // Increase quantity of a product in the cart
+    const increaseQuantity = (productId) => {
+        const updatedCart = cart.map((item) => {
+            if (item._id === productId) {
+                return {
+                    ...item,
+                    quantity: item.quantity + 1,
+                };
+            }
+            return item;
+        });
+        setCart(updatedCart);
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+    };
+
+    // Decrease quantity of a product in the cart
+    const decreaseQuantity = (productId) => {
+        const updatedCart = cart.map((item) => {
+            if (item._id === productId && item.quantity > 1) {
+                return {
+                    ...item,
+                    quantity: item.quantity - 1,
+                };
+            }
+            return item;
+        });
+        setCart(updatedCart);
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+    };
+
+
     //detele item
     const removeCartItem = (pid) => {
         try {
@@ -89,7 +121,7 @@ const CartPage = () => {
                                 {cart?.length
                                     ? `You Have ${cart.length} items in your cart ${auth?.token ? "" : "please login to checkout !"
                                     }`
-                                    : " Your Cart Is Empty"}
+                                    : " Your Cart is Empty"}
                             </p>
                         </h1>
                     </div>
@@ -113,6 +145,21 @@ const CartPage = () => {
                                         <p>Price : NPR.{p.price}</p>
                                     </div>
                                     <div className="col-md-4 cart-remove-btn">
+                                        <div>
+                                            <button
+                                                className=" col btn btn-sm btn-primary"
+                                                onClick={() => decreaseQuantity(p._id)}
+                                            >
+                                                -
+                                            </button>
+                                            <span>{p.quantity}</span>
+                                            <button
+                                                className="btn btn-sm btn-primary"
+                                                onClick={() => increaseQuantity(p._id)}
+                                            >
+                                                +
+                                            </button>
+                                        </div>
                                         <button
                                             className="btn btn-danger"
                                             onClick={() => removeCartItem(p._id)}
@@ -165,27 +212,26 @@ const CartPage = () => {
                                 </div>
                             )}
                             <div className="mt-2">
-                                {
-                                    !clientToken || !cart?.length ? (
-                                        " "
-                                    ) : (
-                                        <>
-                                            <DropIn
-                                                options={{
-                                                    authorization: clientToken,
-                                                    paypal: {
-                                                        flow: 'vault',
-                                                    },
-                                                }}
-                                                onInstance={(instance) => setInstance(instance)}
-                                            />
-                                            <button className="btn btn-primary" onClick={handlePayment}
-                                                disabled={!clientToken || !loading || !instance || !auth?.user?.address}
-                                            >
-                                                {loading ? "Processing...." : "Make Payment"}
-                                            </button>
-                                        </>
-                                    )
+                                {!clientToken || !auth?.token || !cart?.length ? (
+                                    ""
+                                ) : (
+                                    <>
+                                        <DropIn
+                                            options={{
+                                                authorization: clientToken,
+                                                paypal: {
+                                                    flow: "vault",
+                                                },
+                                            }}
+                                            onInstance={(instance) => setInstance(instance)}
+                                        />
+                                        <button className="btn btn-primary" onClick={handlePayment}
+                                            disabled={loading || !instance || !auth?.user?.address}
+                                        >
+                                            {loading ? "Processing...." : "Make Payment"}
+                                        </button>
+                                    </>
+                                )
                                 }
                             </div>
                         </div>
@@ -193,7 +239,7 @@ const CartPage = () => {
                 </div>
             </div>
         </Layout>
-    )
+    );
 };
 
 export default CartPage;

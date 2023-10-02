@@ -30,6 +30,41 @@ const ProductDetails = () => {
             console.log(error);
         }
     };
+
+    
+      // Increase quantity of a product in the cart
+    const increaseQuantity = (productId) => {
+        const updatedCart = cart.map((item) => {
+            if (item._id === productId) {
+                return {
+                    ...item,
+                    quantity: item.quantity + 1,
+                };
+            }
+            return item;
+        });
+        setCart(updatedCart);
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+    };
+
+        // Add new item to the cart
+    const addToCart = (product) => {
+        const existingItem = cart.find((item) => item._id === product._id);
+
+        if (existingItem) {
+            // If item already exists, increase the quantity
+            increaseQuantity(product._id);
+            toast.success('Item added to cart');
+        } else {
+            // If item doesn't exist, add it to the cart with quantity 1
+            const newItem = { ...product, quantity: 1 };
+            const updatedCart = [...cart, newItem];
+            setCart(updatedCart);
+            localStorage.setItem("cart", JSON.stringify(updatedCart));
+            toast.success('Item added to cart');
+        }
+    };
+
     //get similar product
     const getSimilarProduct = async (pid, cid) => {
         try {
@@ -66,7 +101,9 @@ const ProductDetails = () => {
                         })}
                     </h6>
                     <h6>Category : {product?.category?.name}</h6>
-                    <button class="btn btn-secondary ms-1">ADD TO CART</button>
+                    <button class="btn btn-secondary ms-1"
+                        onClick={()=> addToCart(product)}
+                    >ADD TO CART</button>
                 </div>
             </div>
             <hr />
@@ -82,6 +119,7 @@ const ProductDetails = () => {
                                 src={`/api/v1/product/product-photo/${p._id}`}
                                 className="card-img-top"
                                 alt={p.name}
+                                onClick={() => navigate(`/product/${p.slug}`)}
                             />
                             <div className="card-body">
                                 <div className="card-name-price">
@@ -104,12 +142,7 @@ const ProductDetails = () => {
                                     <button
                                         className="btn btn-dark ms-1"
                                         onClick={() => {
-                                            setCart([...cart, p]);
-                                            localStorage.setItem(
-                                                "cart",
-                                                JSON.stringify([...cart, p])
-                                            );
-                                            toast.success("Item Added to cart");
+                                            addToCart(p)
                                         }}
                                     >
                                         ADD TO CART
